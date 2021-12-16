@@ -3,6 +3,7 @@
 class class_EcuM{
    public:
       void InitFunction             (void);
+      void MainFunction             (void);
       void StartupTwo               (void);
       void DeterminePbConfiguration (void);
       bool GetPendingWakeupEvents   (void);
