@@ -32,17 +32,6 @@ void class_EcuM::StartupTwo(void){
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
-void class_EcuM::MainFunction(void){
-   switch(EcuM_Context.ePhase){
-      case E_EcuM_Phase_UP:
-         break;
-
-      default:
-         EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
-         break;
-   }
-}
-
 void class_EcuM::DeterminePbConfiguration(void){
 }
 
@@ -60,12 +49,33 @@ void class_EcuM::LoopDetection(void){
 void class_EcuM::SelectShutdownTarget(void){
 }
 
-void class_EcuM::GoDownHaltPoll(void){
+void class_EcuM::GoDownHaltPoll(void){//TBD: static?
    Swc_EcuM.OffPreOs();
    Os.Shutdown();
 }
 
-void class_EcuM::Shutdown(void){
+void class_EcuM::Shutdown(void){//TBD: static?
    Swc_EcuM.OffPostOs();
+}
+
+void class_EcuM::MainFunction(void){
+   switch(EcuM_Context.ePhase){
+      case E_EcuM_Phase_UP:
+         break;
+
+      case E_EcuM_Phase_SLEEP:
+         //...
+         EcuM_Context.ePhase = E_EcuM_Phase_UP;
+         break;
+
+      case E_EcuM_Phase_SHUTDOWN:
+         GoDownHaltPoll();
+         Shutdown();
+         break;
+
+      default:
+         EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
+         break;
+   }
 }
 
