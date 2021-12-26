@@ -2,7 +2,7 @@
 
 #include "Swc_EcuM.h"
 #include "Os.h"
-//#include "Mcu.h"
+#include "Mcu.h"
 
 typedef enum{
       E_EcuM_Phase_UNKNOWN
@@ -40,7 +40,7 @@ bool class_EcuM::GetPendingWakeupEvents(void){
 }
 
 void class_EcuM::GetValidatedWakeupEvents(void){
-   //Mcu.GetResetReason();
+   Mcu.GetResetReason();
 }
 
 void class_EcuM::LoopDetection(void){
