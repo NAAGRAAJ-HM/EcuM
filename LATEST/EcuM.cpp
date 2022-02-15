@@ -6,11 +6,13 @@
 /*****************************************************/
 /* #INCLUDES                                         */
 /*****************************************************/
-#include "EcuM.h"
+#include "module.h"
+
+#include "EcuM_Unused.h"
 
 #include "Swc_EcuM.h"
-#include "Os.h"
-#include "Mcu.h"
+#include "Os_EcuM.h"
+#include "Mcu_EcuM.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -31,9 +33,16 @@ typedef enum{
    ,  E_EcuM_Phase_SHUTDOWN
 }enum_EcuM_Phase;
 
-class class_EcuM_Context{
+class class_EcuM_Unused_Context{
    public:
       enum_EcuM_Phase ePhase;
+};
+
+class module_EcuM : public class_module{
+   public:
+      FUNC(void, ECUM_CODE) InitFunction   (void);
+      FUNC(void, ECUM_CODE) DeInitFunction (void);
+      FUNC(void, ECUM_CODE) MainFunction   (void);
 };
 
 /*****************************************************/
@@ -47,51 +56,51 @@ class class_EcuM_Context{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-static class_EcuM_Context EcuM_Context;
+static class_EcuM_Unused_Context EcuM_Context;
 
-class_EcuM EcuM;
+module_EcuM EcuM;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-FUNC(void, ECUM_CODE) class_EcuM::InitFunction(void){
+FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
-   Swc_EcuM.StartPreOs();
-   Os.Start();
+   EcuM_Client_ptr_Swc_EcuM->StartPreOs();
+   EcuM_Client_ptr_Os->Start();
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::StartupTwo(void){
-   Swc_EcuM.StartPostOs();
+FUNC(void, ECUM_CODE) class_EcuM_Unused::StartupTwo(void){
+   EcuM_Client_ptr_Swc_EcuM->StartPostOs();
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::DeterminePbConfiguration(void){
+FUNC(void, ECUM_CODE) class_EcuM_Unused::DeterminePbConfiguration(void){
 }
 
-bool class_EcuM::GetPendingWakeupEvents(void){
+bool class_EcuM_Unused::GetPendingWakeupEvents(void){
    return true;
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::GetValidatedWakeupEvents(void){
+FUNC(void, ECUM_CODE) class_EcuM_Unused::GetValidatedWakeupEvents(void){
    Mcu.GetResetReason();
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::LoopDetection(void){
+FUNC(void, ECUM_CODE) class_EcuM_Unused::LoopDetection(void){
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::SelectShutdownTarget(void){
+FUNC(void, ECUM_CODE) class_EcuM_Unused::SelectShutdownTarget(void){
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::GoDownHaltPoll(void){//TBD: static?
+FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){//TBD: static?
    Swc_EcuM.OffPreOs();
    Os.Shutdown();
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::Shutdown(void){//TBD: static?
+FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){//TBD: static?
    Swc_EcuM.OffPostOs();
 }
 
-FUNC(void, ECUM_CODE) class_EcuM::MainFunction(void){
+FUNC(void, ECUM_CODE) class_EcuM_Unused::MainFunction(void){
    switch(EcuM_Context.ePhase){
       case E_EcuM_Phase_UP:
          break;
