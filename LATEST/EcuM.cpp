@@ -7,6 +7,7 @@
 /* #INCLUDES                                         */
 /*****************************************************/
 #include "module.h"
+#include "EcuM_Os.h"
 
 #include "EcuM_Unused.h"
 
@@ -33,16 +34,20 @@ typedef enum{
    ,  E_EcuM_Phase_SHUTDOWN
 }enum_EcuM_Phase;
 
-class class_EcuM_Unused_Context{
+class class_EcuM_Context{
    public:
       enum_EcuM_Phase ePhase;
 };
 
-class module_EcuM : public class_module{
+class module_EcuM:
+      public class_module
+   ,  public interface_EcuM_Os
+{
    public:
       FUNC(void, ECUM_CODE) InitFunction   (void);
       FUNC(void, ECUM_CODE) DeInitFunction (void);
       FUNC(void, ECUM_CODE) MainFunction   (void);
+      FUNC(void, ECUM_CODE) StartupTwo     (void);
 };
 
 /*****************************************************/
@@ -56,7 +61,7 @@ class module_EcuM : public class_module{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-static class_EcuM_Unused_Context EcuM_Context;
+static class_EcuM_Context EcuM_Context;
 
 module_EcuM EcuM;
 
@@ -69,7 +74,7 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Client_ptr_Os->Start();
 }
 
-FUNC(void, ECUM_CODE) class_EcuM_Unused::StartupTwo(void){
+FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
    EcuM_Client_ptr_Swc_EcuM->StartPostOs();
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
@@ -82,7 +87,7 @@ bool class_EcuM_Unused::GetPendingWakeupEvents(void){
 }
 
 FUNC(void, ECUM_CODE) class_EcuM_Unused::GetValidatedWakeupEvents(void){
-   Mcu.GetResetReason();
+   EcuM_Client_ptr_Mcu->GetResetReason();
 }
 
 FUNC(void, ECUM_CODE) class_EcuM_Unused::LoopDetection(void){
@@ -92,12 +97,12 @@ FUNC(void, ECUM_CODE) class_EcuM_Unused::SelectShutdownTarget(void){
 }
 
 FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){//TBD: static?
-   Swc_EcuM.OffPreOs();
-   Os.Shutdown();
+   EcuM_Client_ptr_Swc_EcuM->OffPreOs();
+   EcuM_Client_ptr_Os->Shutdown();
 }
 
 FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){//TBD: static?
-   Swc_EcuM.OffPostOs();
+   EcuM_Client_ptr_Swc_EcuM->OffPostOs();
 }
 
 FUNC(void, ECUM_CODE) class_EcuM_Unused::MainFunction(void){
