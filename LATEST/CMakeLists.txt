@@ -1,0 +1,31 @@
+add_library(
+   BswAUTOSAR_Service_EcuM
+   EcuM.cpp
+)
+
+include_directories(
+   ../../BswAUTOSAR_McAL_Adc/LATEST
+   ../../BswAUTOSAR_McAL_Can/LATEST
+   ../../BswAUTOSAR_McAL_Cry/LATEST
+   ../../BswAUTOSAR_McAL_Dio/LATEST
+   ../../BswAUTOSAR_McAL_Eep/LATEST
+   ../../BswAUTOSAR_McAL_Eth/LATEST
+   ../../BswAUTOSAR_McAL_Fls/LATEST
+   ../../BswAUTOSAR_McAL_Fr/LATEST
+   ../../BswAUTOSAR_McAL_Gpt/LATEST
+   ../../BswAUTOSAR_McAL_Icu/LATEST
+   ../../BswAUTOSAR_McAL_Lin/LATEST
+   ../../BswAUTOSAR_McAL_Mcu/LATEST
+   ../../BswAUTOSAR_McAL_Ocu/LATEST
+   ../../BswAUTOSAR_McAL_Port/LATEST
+   ../../BswAUTOSAR_McAL_Pwm/LATEST
+   ../../BswAUTOSAR_McAL_Spi/LATEST
+   ../../BswAUTOSAR_McAL_Wdg/LATEST
+   ../../BswAUTOSAR_Service_Os/LATEST
+   ../../BswAUTOSAR_Service_SchM/LATEST
+   ../../common/LATEST
+   ../../common/LATEST/Compiler_Abstraction_GNU/LATEST
+   ../../SwcServiceEcuM/LATEST
+   ../../SwcServiceOs/LATEST
+)
+

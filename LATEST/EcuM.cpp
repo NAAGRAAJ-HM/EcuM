@@ -7,11 +7,12 @@
 /* #INCLUDES                                         */
 /*****************************************************/
 #include "module.h"
+#include "EcuM_EcuM.h"
+#include "EcuM_SchM.h"
 #include "EcuM_Os.h"
-
 #include "EcuM_Unused.h"
 
-#include "Swc_EcuM.h"
+#include "SwcServiceEcuM_EcuM.h"
 #include "Os_EcuM.h"
 #include "Mcu_EcuM.h"
 
@@ -40,7 +41,9 @@ class class_EcuM_Context{
 };
 
 class module_EcuM:
-      public class_module
+      public abstract_module
+   ,  public interface_EcuM_EcuM
+   ,  public interface_EcuM_SchM
    ,  public interface_EcuM_Os
 {
    public:
@@ -65,6 +68,9 @@ static class_EcuM_Context EcuM_Context;
 
 module_EcuM EcuM;
 
+interface_EcuM_EcuM *EcuM_Client_ptr_EcuM = &EcuM;
+interface_EcuM_SchM *SchM_Client_ptr_EcuM = &EcuM;
+
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
@@ -72,6 +78,12 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
    EcuM_Client_ptr_Swc_EcuM->StartPreOs();
    EcuM_Client_ptr_Os->Start();
+}
+
+FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
+}
+
+FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
