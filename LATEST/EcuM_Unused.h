@@ -26,8 +26,6 @@ class class_EcuM_Unused{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, ECUM_CODE) InitFunction             (void);
-      FUNC(void, ECUM_CODE) MainFunction             (void);
       FUNC(void, ECUM_CODE) StartupTwo               (void);
       FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
       bool GetPendingWakeupEvents   (void);

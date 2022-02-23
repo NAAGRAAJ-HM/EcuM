@@ -74,6 +74,19 @@ interface_EcuM_SchM *SchM_Client_ptr_EcuM = &EcuM;
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
+//TBD: static?
+//FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){
+static void GoDownHaltPoll(void){
+   EcuM_Client_ptr_Swc_EcuM->OffPreOs();
+   EcuM_Client_ptr_Os->Shutdown();
+}
+
+//TBD: static?
+//FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){
+static void Shutdown(void){
+   EcuM_Client_ptr_Swc_EcuM->OffPostOs();
+}
+
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
    EcuM_Client_ptr_Swc_EcuM->StartPreOs();
@@ -84,6 +97,24 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
+   switch(EcuM_Context.ePhase){
+      case E_EcuM_Phase_UP:
+         break;
+
+      case E_EcuM_Phase_SLEEP:
+         //...
+         EcuM_Context.ePhase = E_EcuM_Phase_UP;
+         break;
+
+      case E_EcuM_Phase_SHUTDOWN:
+         GoDownHaltPoll();
+         Shutdown();
+         break;
+
+      default:
+         EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
+         break;
+   }
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
@@ -106,36 +137,6 @@ FUNC(void, ECUM_CODE) class_EcuM_Unused::LoopDetection(void){
 }
 
 FUNC(void, ECUM_CODE) class_EcuM_Unused::SelectShutdownTarget(void){
-}
-
-FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){//TBD: static?
-   EcuM_Client_ptr_Swc_EcuM->OffPreOs();
-   EcuM_Client_ptr_Os->Shutdown();
-}
-
-FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){//TBD: static?
-   EcuM_Client_ptr_Swc_EcuM->OffPostOs();
-}
-
-FUNC(void, ECUM_CODE) class_EcuM_Unused::MainFunction(void){
-   switch(EcuM_Context.ePhase){
-      case E_EcuM_Phase_UP:
-         break;
-
-      case E_EcuM_Phase_SLEEP:
-         //...
-         EcuM_Context.ePhase = E_EcuM_Phase_UP;
-         break;
-
-      case E_EcuM_Phase_SHUTDOWN:
-         GoDownHaltPoll();
-         Shutdown();
-         break;
-
-      default:
-         EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
-         break;
-   }
 }
 
 /*****************************************************/
