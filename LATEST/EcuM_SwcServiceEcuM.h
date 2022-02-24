@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : EcuM_EcuM.h                              */
+/* File   : EcuM_SwcServiceEcuM.h                    */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -8,8 +8,6 @@
 /* #INCLUDES                                         */
 /*****************************************************/
 #include "Compiler_Cfg_EcuM.h"
-
-#include "EcuM_Client.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -22,13 +20,16 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class interface_EcuM_EcuM : public interface_EcuM_Client{
+class interface_EcuM_SwcServiceEcuM{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, ECUM_CODE) InitFunction   (void);
-      FUNC(void, ECUM_CODE) DeInitFunction (void);
+      FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
+      FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
+      bool GetPendingWakeupEvents   (void);
+      FUNC(void, ECUM_CODE) LoopDetection            (void);
+      FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
 };
 
 /*****************************************************/
@@ -42,7 +43,7 @@ class interface_EcuM_EcuM : public interface_EcuM_Client{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern interface_EcuM_EcuM *EcuM_Client_ptr_EcuM;
+extern interface_EcuM_SwcServiceEcuM *SwcServiceEcuM_Client_ptr_EcuM;
 
 /*****************************************************/
 /* EOF                                               */

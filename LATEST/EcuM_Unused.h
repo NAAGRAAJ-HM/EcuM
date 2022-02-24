@@ -26,12 +26,6 @@ class class_EcuM_Unused{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, ECUM_CODE) StartupTwo               (void);
-      FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
-      bool GetPendingWakeupEvents   (void);
-      FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
-      FUNC(void, ECUM_CODE) LoopDetection            (void);
-      FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
       FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);
       FUNC(void, ECUM_CODE) Shutdown                 (void);
 };
