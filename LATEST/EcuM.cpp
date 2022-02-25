@@ -84,19 +84,19 @@ interface_EcuM_SchM *SchM_Client_ptr_EcuM = &EcuM;
 //TBD: static?
 //FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){
 static void GoDownHaltPoll(void){
-   EcuM_Client_ptr_Swc_EcuM->OffPreOs();
+   EcuM_Client_ptr_SwcServiceEcuM->OffPreOs();
    EcuM_Client_ptr_Os->Shutdown();
 }
 
 //TBD: static?
 //FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){
 static void Shutdown(void){
-   EcuM_Client_ptr_Swc_EcuM->OffPostOs();
+   EcuM_Client_ptr_SwcServiceEcuM->OffPostOs();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
-   EcuM_Client_ptr_Swc_EcuM->StartPreOs();
+   EcuM_Client_ptr_SwcServiceEcuM->StartPreOs();
    EcuM_Client_ptr_Os->Start();
 }
 
@@ -125,7 +125,7 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
-   EcuM_Client_ptr_Swc_EcuM->StartPostOs();
+   EcuM_Client_ptr_SwcServiceEcuM->StartPostOs();
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
