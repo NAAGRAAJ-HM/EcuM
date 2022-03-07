@@ -42,7 +42,7 @@ class interface_EcuM_StartUp : public interface_EcuM_Client{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern interface_EcuM_StartUp *StartUp_Client_ptr_EcuM;
+extern interface_EcuM_Client *StartUp_Client_ptr_EcuM;
 
 /*****************************************************/
 /* EOF                                               */

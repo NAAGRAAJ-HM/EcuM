@@ -13,9 +13,10 @@
 #include "EcuM_SwcServiceEcuM.h"
 #include "EcuM_Unused.h"
 
-#include "SwcServiceEcuM_EcuM.h"
-#include "Os_EcuM.h"
 #include "Mcu_EcuM.h"
+#include "Os_EcuM.h"
+#include "StartUp_EcuM.h"
+#include "SwcServiceEcuM_EcuM.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -43,21 +44,21 @@ class class_EcuM_Context{
 
 class module_EcuM:
       public abstract_module
-   ,  public interface_EcuM_StartUp
-   ,  public interface_EcuM_SchM
    ,  public interface_EcuM_Os
-   ,  public interface_EcuM_SwcServiceEcuM
+//   ,  public interface_EcuM_SwcServiceEcuM
 {
    public:
       FUNC(void, ECUM_CODE) InitFunction             (void);
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
       FUNC(void, ECUM_CODE) StartupTwo               (void);
+/*
       FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
       bool GetPendingWakeupEvents   (void);
       FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
       FUNC(void, ECUM_CODE) LoopDetection            (void);
       FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
+*/
 };
 
 /*****************************************************/
@@ -73,10 +74,10 @@ class module_EcuM:
 /*****************************************************/
 static class_EcuM_Context EcuM_Context;
 
-module_EcuM EcuM;
-
-interface_EcuM_StartUp *StartUp_Client_ptr_EcuM = &EcuM;
-interface_EcuM_SchM *SchM_Client_ptr_EcuM = &EcuM;
+module_EcuM    EcuM;
+infEcuMClient* gptrinfEcuMClient_EcuM = &EcuM;
+infSchMClient* gptrinfSchMClient_EcuM = &EcuM;
+interface_EcuM_Os     *Os_Client_ptr_EcuM      = &EcuM;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
@@ -129,6 +130,7 @@ FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
+/*
 FUNC(void, ECUM_CODE) module_EcuM::DeterminePbConfiguration(void){
 }
 
@@ -137,6 +139,7 @@ FUNC(bool, ECUM_CODE) module_EcuM::GetPendingWakeupEvents(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::GetValidatedWakeupEvents(void){
+   extern interface_Mcu_EcuM *EcuM_Client_ptr_Mcu;
    EcuM_Client_ptr_Mcu->GetResetReason();
 }
 
@@ -145,6 +148,7 @@ FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
 
 FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 }
+*/
 
 /*****************************************************/
 /* EOF                                               */

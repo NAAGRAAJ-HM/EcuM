@@ -25,7 +25,7 @@ class interface_EcuM_Os{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, ECUM_CODE) StartupTwo(void);
+      virtual FUNC(void, ECUM_CODE) StartupTwo(void) = 0;
 };
 
 /*****************************************************/
