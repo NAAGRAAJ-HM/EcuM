@@ -85,20 +85,20 @@ interface_EcuM_Os     *Os_Client_ptr_EcuM      = &EcuM;
 //TBD: static?
 //FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){
 static void GoDownHaltPoll(void){
-   EcuM_Client_ptr_SwcServiceEcuM->OffPreOs();
-   EcuM_Client_ptr_Os->Shutdown();
+   gptrinfSwcServiceEcuM_EcuM->OffPreOs();
+   gptrinfOs_EcuM->Shutdown();
 }
 
 //TBD: static?
 //FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){
 static void Shutdown(void){
-   EcuM_Client_ptr_SwcServiceEcuM->OffPostOs();
+   gptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
-   EcuM_Client_ptr_SwcServiceEcuM->StartPreOs();
-   EcuM_Client_ptr_Os->Start();
+   gptrinfSwcServiceEcuM_EcuM->StartPreOs();
+   gptrinfOs_EcuM->Start();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
@@ -126,7 +126,7 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
-   EcuM_Client_ptr_SwcServiceEcuM->StartPostOs();
+   gptrinfSwcServiceEcuM_EcuM->StartPostOs();
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
@@ -139,8 +139,8 @@ FUNC(bool, ECUM_CODE) module_EcuM::GetPendingWakeupEvents(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::GetValidatedWakeupEvents(void){
-   extern interface_Mcu_EcuM *EcuM_Client_ptr_Mcu;
-   EcuM_Client_ptr_Mcu->GetResetReason();
+   extern interface_Mcu_EcuM *gptrinfEcuMClient_Mcu;
+   gptrinfEcuMClient_Mcu->GetResetReason();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
