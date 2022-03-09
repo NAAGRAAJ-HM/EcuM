@@ -20,16 +20,16 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class interface_EcuM_SwcServiceEcuM{
+class infEcuM_SwcServiceEcuM{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
-      FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
-      bool GetPendingWakeupEvents   (void);
-      FUNC(void, ECUM_CODE) LoopDetection            (void);
-      FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
+      virtual FUNC(void, ECUM_CODE) DeterminePbConfiguration (void) = 0;
+      virtual FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void) = 0;
+      virtual FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void) = 0;
+      virtual FUNC(void, ECUM_CODE) LoopDetection            (void) = 0;
+      virtual FUNC(void, ECUM_CODE) SelectShutdownTarget     (void) = 0;
 };
 
 /*****************************************************/
@@ -43,7 +43,7 @@ class interface_EcuM_SwcServiceEcuM{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern interface_EcuM_SwcServiceEcuM *SwcServiceEcuM_Client_ptr_EcuM;
+extern infEcuM_SwcServiceEcuM* gptrinfEcuM_SwcServiceEcuM;
 
 /*****************************************************/
 /* EOF                                               */

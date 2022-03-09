@@ -44,21 +44,19 @@ class class_EcuM_Context{
 
 class module_EcuM:
       public abstract_module
-   ,  public interface_EcuM_Os
-//   ,  public interface_EcuM_SwcServiceEcuM
+   ,  public infEcuM_Os
+   ,  public infEcuM_SwcServiceEcuM
 {
    public:
       FUNC(void, ECUM_CODE) InitFunction             (void);
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
       FUNC(void, ECUM_CODE) StartupTwo               (void);
-/*
       FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
-      bool GetPendingWakeupEvents   (void);
+      FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void);
       FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
       FUNC(void, ECUM_CODE) LoopDetection            (void);
       FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
-*/
 };
 
 /*****************************************************/
@@ -74,10 +72,11 @@ class module_EcuM:
 /*****************************************************/
 static class_EcuM_Context EcuM_Context;
 
-module_EcuM    EcuM;
-infEcuMClient* gptrinfEcuMClient_EcuM = &EcuM;
-infSchMClient* gptrinfSchMClient_EcuM = &EcuM;
-interface_EcuM_Os     *Os_Client_ptr_EcuM      = &EcuM;
+module_EcuM             EcuM;
+infEcuMClient*          gptrinfEcuMClient_EcuM     = &EcuM;
+infSchMClient*          gptrinfSchMClient_EcuM     = &EcuM;
+infEcuM_Os*             gptrinfEcuM_Os             = &EcuM;
+infEcuM_SwcServiceEcuM* gptrinfEcuM_SwcServiceEcuM = &EcuM;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
@@ -130,7 +129,6 @@ FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
-/*
 FUNC(void, ECUM_CODE) module_EcuM::DeterminePbConfiguration(void){
 }
 
@@ -139,8 +137,7 @@ FUNC(bool, ECUM_CODE) module_EcuM::GetPendingWakeupEvents(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::GetValidatedWakeupEvents(void){
-   extern interface_Mcu_EcuM *gptrinfEcuMClient_Mcu;
-   gptrinfEcuMClient_Mcu->GetResetReason();
+   gptrinfMcu_EcuM->GetResetReason();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
@@ -148,7 +145,6 @@ FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
 
 FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 }
-*/
 
 /*****************************************************/
 /* EOF                                               */
