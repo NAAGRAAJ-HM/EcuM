@@ -7,11 +7,11 @@
 /* #INCLUDES                                         */
 /*****************************************************/
 #include "module.h"
-#include "EcuM_StartUp.h"
-#include "EcuM_SchM.h"
-#include "EcuM_Os.h"
-#include "EcuM_SwcServiceEcuM.h"
-#include "EcuM_Unused.h"
+#include "infEcuM_StartUp.h"
+#include "infEcuM_SchM.h"
+#include "infEcuM_Os.h"
+#include "infEcuM_SwcServiceEcuM.h"
+#include "infEcuM_Unused.h"
 
 #include "Mcu_EcuM.h"
 #include "Os_EcuM.h"
@@ -50,6 +50,7 @@ class module_EcuM:
    public:
       FUNC(void, ECUM_CODE) InitFunction             (void);
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
+      FUNC(void, ECUM_CODE) GetVersionInfo           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
       FUNC(void, ECUM_CODE) StartupTwo               (void);
       FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
@@ -74,6 +75,7 @@ static class_EcuM_Context EcuM_Context;
 
 module_EcuM             EcuM;
 infEcuMClient*          gptrinfEcuMClient_EcuM     = &EcuM;
+infDcmClient*           gptrinfDcmClient_EcuM      = &EcuM;
 infSchMClient*          gptrinfSchMClient_EcuM     = &EcuM;
 infEcuM_Os*             gptrinfEcuM_Os             = &EcuM;
 infEcuM_SwcServiceEcuM* gptrinfEcuM_SwcServiceEcuM = &EcuM;
@@ -101,6 +103,9 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
+}
+
+FUNC(void, ECUM_CODE) module_EcuM::GetVersionInfo(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
