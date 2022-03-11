@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : EcuM_SwcServiceEcuM.h                    */
+/* File   : EcuM_Dcm.h                               */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -20,17 +20,6 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class infEcuM_SwcServiceEcuM{
-   public:
-/*****************************************************/
-/* FUNCTIONS                                         */
-/*****************************************************/
-      virtual FUNC(void, ECUM_CODE) DeterminePbConfiguration (void) = 0;
-      virtual FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void) = 0;
-      virtual FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void) = 0;
-      virtual FUNC(void, ECUM_CODE) LoopDetection            (void) = 0;
-      virtual FUNC(void, ECUM_CODE) SelectShutdownTarget     (void) = 0;
-};
 
 /*****************************************************/
 /* CONSTS                                            */
@@ -43,7 +32,11 @@ class infEcuM_SwcServiceEcuM{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infEcuM_SwcServiceEcuM* gptrinfEcuM_SwcServiceEcuM;
+extern infDcmClient* gptrinfDcmClient_EcuM;
+
+/*****************************************************/
+/* FUNCTIONS                                         */
+/*****************************************************/
 
 /*****************************************************/
 /* EOF                                               */

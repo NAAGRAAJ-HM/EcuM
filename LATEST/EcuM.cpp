@@ -8,15 +8,10 @@
 /*****************************************************/
 #include "module.h"
 #include "infEcuM_StartUp.h"
+#include "infEcuM_Dcm.h"
 #include "infEcuM_SchM.h"
 #include "infEcuM_Os.h"
 #include "infEcuM_SwcServiceEcuM.h"
-#include "infEcuM_Unused.h"
-
-#include "Mcu_EcuM.h"
-#include "Os_EcuM.h"
-#include "StartUp_EcuM.h"
-#include "SwcServiceEcuM_EcuM.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -29,19 +24,6 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-typedef enum{
-      E_EcuM_Phase_UNKNOWN
-   ,  E_EcuM_Phase_STARTUP
-   ,  E_EcuM_Phase_UP
-   ,  E_EcuM_Phase_SLEEP
-   ,  E_EcuM_Phase_SHUTDOWN
-}enum_EcuM_Phase;
-
-class class_EcuM_Context{
-   public:
-      enum_EcuM_Phase ePhase;
-};
-
 class module_EcuM:
       public abstract_module
    ,  public infEcuM_Os
@@ -71,18 +53,25 @@ class module_EcuM:
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-static class_EcuM_Context EcuM_Context;
-
 module_EcuM             EcuM;
 infEcuMClient*          gptrinfEcuMClient_EcuM     = &EcuM;
 infDcmClient*           gptrinfDcmClient_EcuM      = &EcuM;
 infSchMClient*          gptrinfSchMClient_EcuM     = &EcuM;
-infEcuM_Os*             gptrinfEcuM_Os             = &EcuM;
+
+ERROR
+//#define CONSTP2CONST(ptrtype, memclass, ptrclass) const ptrclass ptrtype * const memclass
+CONSTP2CONST(infEcuM_Os) gptrinfEcuM_Os            = &EcuM;
+
 infEcuM_SwcServiceEcuM* gptrinfEcuM_SwcServiceEcuM = &EcuM;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
+#include "infMcu_EcuM.h"
+#include "infOs_EcuM.h"
+#include "infStartUp_EcuM.h"
+#include "infSwcServiceEcuM_EcuM.h"
+
 //TBD: static?
 //FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){
 static void GoDownHaltPoll(void){
@@ -95,6 +84,21 @@ static void GoDownHaltPoll(void){
 static void Shutdown(void){
    gptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
+
+typedef enum{
+      E_EcuM_Phase_UNKNOWN
+   ,  E_EcuM_Phase_STARTUP
+   ,  E_EcuM_Phase_UP
+   ,  E_EcuM_Phase_SLEEP
+   ,  E_EcuM_Phase_SHUTDOWN
+}enum_EcuM_Phase;
+
+class class_EcuM_Context{
+   public:
+      enum_EcuM_Phase ePhase;
+};
+
+static class_EcuM_Context EcuM_Context;
 
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
@@ -150,6 +154,8 @@ FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
 
 FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 }
+
+#include "EcuM_Unused.h"
 
 /*****************************************************/
 /* EOF                                               */
