@@ -39,7 +39,7 @@ class infEcuM_Os{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infEcuM_Os* gptrinfEcuM_Os;
+extern CONSTP2VAR(infEcuM_Os, ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os;
 
 /*****************************************************/
 /* EOF                                               */
