@@ -43,7 +43,7 @@ class infEcuM_SwcServiceEcuM{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infEcuM_SwcServiceEcuM* gptrinfEcuM_SwcServiceEcuM;
+extern CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM;
 
 /*****************************************************/
 /* EOF                                               */

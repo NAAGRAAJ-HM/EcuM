@@ -32,7 +32,7 @@
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infDcmClient* gptrinfDcmClient_EcuM;
+extern CONSTP2VAR(infDcmClient, ECUM_VAR, ECUM_CONST) gptrinfDcmClient_EcuM;
 
 /*****************************************************/
 /* FUNCTIONS                                         */
