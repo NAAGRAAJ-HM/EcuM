@@ -6,9 +6,8 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "infEcuM_Version.h"
-
 #include "module.h"
+#include "infEcuM_Version.h"
 #include "infEcuM_StartUp.h"
 #include "infEcuM_Dcm.h"
 #include "infEcuM_SchM.h"
@@ -55,19 +54,6 @@ class module_EcuM:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-
-/******************************************************************************/
-/* FUNCTIONS                                                                  */
-/******************************************************************************/
-
-/******************************************************************************/
-/* EOF                                                                        */
-/******************************************************************************/
-
-
-/*****************************************************/
-/* OBJECTS                                           */
-/*****************************************************/
 VAR(module_EcuM, ECUM_VAR) EcuM;
 CONSTP2VAR(infEcuMClient, ECUM_VAR, ECUM_CONST) gptrinfEcuMClient_EcuM = &EcuM;
 CONSTP2VAR(infDcmClient,  ECUM_VAR, ECUM_CONST) gptrinfDcmClient_EcuM  = &EcuM;
@@ -75,9 +61,9 @@ CONSTP2VAR(infSchMClient, ECUM_VAR, ECUM_CONST) gptrinfSchMClient_EcuM = &EcuM;
 CONSTP2VAR(infEcuM_Os,             ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os             = &EcuM;
 CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM = &EcuM;
 
-/*****************************************************/
-/* FUNCTIONS                                         */
-/*****************************************************/
+/******************************************************************************/
+/* FUNCTIONS                                                                  */
+/******************************************************************************/
 #include "infMcu_EcuM.h"
 #include "infOs_EcuM.h"
 #include "infStartUp_EcuM.h"
@@ -112,12 +98,16 @@ class class_EcuM_Context{
 static class_EcuM_Context EcuM_Context;
 
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
-   EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
    gptrinfSwcServiceEcuM_EcuM->StartPreOs();
    gptrinfOs_EcuM->Start();
+
+   EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
+   EcuM.IsInitDone     = E_OK;
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
+   EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
+   EcuM.IsInitDone     = E_NOT_OK;
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::GetVersionInfo(void){
@@ -168,7 +158,7 @@ FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 
 #include "EcuM_Unused.h"
 
-/*****************************************************/
-/* EOF                                               */
-/*****************************************************/
+/******************************************************************************/
+/* EOF                                                                        */
+/******************************************************************************/
 
