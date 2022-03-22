@@ -7,7 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.h"
-#include "infEcuM_Version.h"
+#include "EcuM_Cfg.h"
 #include "infEcuM_StartUp.h"
 #include "infEcuM_Dcm.h"
 #include "infEcuM_SchM.h"
@@ -17,10 +17,19 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
+#define ECUM_AR_RELEASE_MAJOR_VERSION                                          4
+#define ECUM_AR_RELEASE_MINOR_VERSION                                          3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
+#if(ECUM_AR_RELEASE_MAJOR_VERSION != STD_AR_RELEASE_MAJOR_VERSION)
+   #error "Incompatible ECUM_AR_RELEASE_MAJOR_VERSION!"
+#endif
+
+#if(ECUM_AR_RELEASE_MINOR_VERSION != STD_AR_RELEASE_MINOR_VERSION)
+   #error "Incompatible ECUM_AR_RELEASE_MINOR_VERSION!"
+#endif
 
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
@@ -111,6 +120,11 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::GetVersionInfo(void){
+#if(STD_ON == EcuM_DevErrorDetect)
+//TBD: API parameter check
+   Det_ReportError(
+   );
+#endif
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
