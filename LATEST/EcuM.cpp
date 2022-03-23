@@ -50,6 +50,16 @@ class module_EcuM:
       FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
       FUNC(void, ECUM_CODE) LoopDetection            (void);
       FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
+
+   private:
+      CONST(Std_TypeVersionInfo, ECUM_CONST) VersionInfo = {
+            0x0000
+         ,  0xFFFF
+         ,  0x01
+         ,  '0'
+         ,  '1'
+         ,  '0'
+      };
 };
 
 /******************************************************************************/
