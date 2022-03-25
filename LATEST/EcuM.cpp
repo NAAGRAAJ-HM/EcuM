@@ -6,13 +6,13 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "module.h"
-#include "CfgEcuM.h"
-#include "infEcuM_StartUp.h"
-#include "infEcuM_Dcm.h"
-#include "infEcuM_SchM.h"
-#include "infEcuM_Os.h"
-#include "infEcuM_SwcServiceEcuM.h"
+#include "module.hpp"
+#include "CfgEcuM.hpp"
+#include "infEcuM_StartUp.hpp"
+#include "infEcuM_Dcm.hpp"
+#include "infEcuM_SchM.hpp"
+#include "infEcuM_Os.hpp"
+#include "infEcuM_SwcServiceEcuM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -83,10 +83,10 @@ CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceE
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-#include "infMcu_EcuM.h"
-#include "infOs_EcuM.h"
-#include "infStartUp_EcuM.h"
-#include "infSwcServiceEcuM_EcuM.h"
+#include "infMcu_EcuM.hpp"
+#include "infOs_EcuM.hpp"
+#include "infStartUp_EcuM.hpp"
+#include "infSwcServiceEcuM_EcuM.hpp"
 
 //TBD: static?
 //FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){
@@ -180,7 +180,7 @@ FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
 FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 }
 
-#include "EcuM_Unused.h"
+#include "EcuM_Unused.hpp"
 
 /******************************************************************************/
 /* EOF                                                                        */
