@@ -180,7 +180,11 @@ FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
 FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 }
 
-#include "EcuM_Unused.hpp"
+class class_EcuM_Unused{
+   public:
+      FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);
+      FUNC(void, ECUM_CODE) Shutdown                 (void);
+};
 
 /******************************************************************************/
 /* EOF                                                                        */
