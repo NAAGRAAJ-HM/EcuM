@@ -7,7 +7,6 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.hpp"
-#include "CfgEcuM.hpp"
 #include "infEcuM_StartUp.hpp"
 #include "infEcuM_Dcm.hpp"
 #include "infEcuM_SchM.hpp"
@@ -40,45 +39,49 @@ class module_EcuM:
    ,  public infEcuM_SwcServiceEcuM
 {
    public:
+      module_EcuM(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
+      }
       FUNC(void, ECUM_CODE) InitFunction             (void);
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
-      FUNC(void, ECUM_CODE) GetVersionInfo           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
+
       FUNC(void, ECUM_CODE) StartupTwo               (void);
       FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
       FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void);
       FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
       FUNC(void, ECUM_CODE) LoopDetection            (void);
       FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
-
-   private:
-      CONST(Std_TypeVersionInfo, ECUM_CONST) VersionInfo = {
-            0x0000
-         ,  0xFFFF
-         ,  0x01
-         ,  '0'
-         ,  '1'
-         ,  '0'
-      };
 };
+
+extern VAR(module_EcuM, ECUM_VAR) EcuM;
 
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
+CONSTP2VAR(infEcuMClient,          ECUM_VAR, ECUM_CONST) gptrinfEcuMClient_EcuM     = &EcuM;
+CONSTP2VAR(infDcmClient,           ECUM_VAR, ECUM_CONST) gptrinfDcmClient_EcuM      = &EcuM;
+CONSTP2VAR(infSchMClient,          ECUM_VAR, ECUM_CONST) gptrinfSchMClient_EcuM     = &EcuM;
+CONSTP2VAR(infEcuM_Os,             ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os             = &EcuM;
+CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM = &EcuM;
 
 /******************************************************************************/
 /* PARAMS                                                                     */
 /******************************************************************************/
+#include "CfgEcuM.hpp"
 
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-VAR(module_EcuM, ECUM_VAR) EcuM;
-CONSTP2VAR(infEcuMClient, ECUM_VAR, ECUM_CONST) gptrinfEcuMClient_EcuM = &EcuM;
-CONSTP2VAR(infDcmClient,  ECUM_VAR, ECUM_CONST) gptrinfDcmClient_EcuM  = &EcuM;
-CONSTP2VAR(infSchMClient, ECUM_VAR, ECUM_CONST) gptrinfSchMClient_EcuM = &EcuM;
-CONSTP2VAR(infEcuM_Os,             ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os             = &EcuM;
-CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM = &EcuM;
+VAR(module_EcuM, ECUM_VAR) EcuM(
+   {
+         0x0000
+      ,  0xFFFF
+      ,  0x01
+      ,  '0'
+      ,  '1'
+      ,  '0'
+   }
+);
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
@@ -127,14 +130,6 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
    EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
    EcuM.IsInitDone     = E_NOT_OK;
-}
-
-FUNC(void, ECUM_CODE) module_EcuM::GetVersionInfo(void){
-#if(STD_ON == EcuM_DevErrorDetect)
-//TBD: API parameter check
-   Det_ReportError(
-   );
-#endif
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
