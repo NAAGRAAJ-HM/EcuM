@@ -6,7 +6,7 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "module.hpp"
+#include "Module.hpp"
 #include "infEcuM_StartUp.hpp"
 #include "infEcuM_Dcm.hpp"
 #include "infEcuM_SchM.hpp"
@@ -120,6 +120,7 @@ class class_EcuM_Context{
 static class_EcuM_Context EcuM_Context;
 
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
+ERROR
    gptrinfSwcServiceEcuM_EcuM->StartPreOs();
    gptrinfOs_EcuM->Start();
 
