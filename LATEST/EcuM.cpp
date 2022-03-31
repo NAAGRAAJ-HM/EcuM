@@ -35,16 +35,20 @@
 /******************************************************************************/
 class module_EcuM:
       public abstract_module
+   ,  public infEcuM_StartUp
    ,  public infEcuM_Os
    ,  public infEcuM_SwcServiceEcuM
 {
    public:
       module_EcuM(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
       }
-      FUNC(void, ECUM_CODE) InitFunction             (void);
+      FUNC(void, ECUM_CODE) InitFunction(
+         CONSTP2CONST(CfgModule_TypeAbstract, ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
+      );
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
 
+      FUNC(void, ECUM_CODE) InitFunction             (void);
       FUNC(void, ECUM_CODE) StartupTwo               (void);
       FUNC(void, ECUM_CODE) DeterminePbConfiguration (void);
       FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void);
@@ -58,9 +62,9 @@ extern VAR(module_EcuM, ECUM_VAR) EcuM;
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
-CONSTP2VAR(infEcuMClient,          ECUM_VAR, ECUM_CONST) gptrinfEcuMClient_EcuM     = &EcuM;
 CONSTP2VAR(infDcmClient,           ECUM_VAR, ECUM_CONST) gptrinfDcmClient_EcuM      = &EcuM;
 CONSTP2VAR(infSchMClient,          ECUM_VAR, ECUM_CONST) gptrinfSchMClient_EcuM     = &EcuM;
+CONSTP2VAR(infEcuM_StartUp,        ECUM_VAR, ECUM_CONST) gptrinfEcuM_StartUp        = &EcuM;
 CONSTP2VAR(infEcuM_Os,             ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os             = &EcuM;
 CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM = &EcuM;
 
@@ -119,18 +123,42 @@ class class_EcuM_Context{
 
 static class_EcuM_Context EcuM_Context;
 
-FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
-ERROR
-   gptrinfSwcServiceEcuM_EcuM->StartPreOs();
-   gptrinfOs_EcuM->Start();
-
-   EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
-   EcuM.IsInitDone     = E_OK;
+FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
+   CONSTP2CONST(CfgModule_TypeAbstract, ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
+){
+   if(E_OK == IsInitDone){
+#if(STD_ON == Dem_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+      if(NULL_PTR == lptrCfgModule){
+#if(STD_ON == Dem_DevErrorDetect)
+         Det_ReportError(
+         );
+#endif
+      }
+      else{
+// check lptrCfgModule for memory faults
+// use PBcfg_EcuM as back-up configuration
+      }
+      EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
+      IsInitDone = E_OK;
+   }
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
-   EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
-   EcuM.IsInitDone     = E_NOT_OK;
+   if(E_OK != IsInitDone){
+#if(STD_ON == Dem_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+      EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
+      IsInitDone = E_NOT_OK;
+   }
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
@@ -152,6 +180,11 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
          EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
          break;
    }
+}
+
+FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
+   gptrinfSwcServiceEcuM_EcuM->StartPreOs();
+   gptrinfOs_EcuM->Start();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){

@@ -20,11 +20,15 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+class infEcuM_StartUp{
+   public:
+      virtual FUNC(void, ECUM_CODE) InitFunction(void) = 0;
+};
 
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
-extern CONSTP2VAR(infEcuMClient, ECUM_VAR, ECUM_CONST) gptrinfEcuMClient_EcuM;
+extern CONSTP2VAR(infEcuM_StartUp, ECUM_VAR, ECUM_CONST) gptrinfEcuM_StartUp;
 
 /******************************************************************************/
 /* PARAMS                                                                     */
