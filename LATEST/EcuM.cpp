@@ -126,6 +126,7 @@ static class_EcuM_Context EcuM_Context;
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
 ){
+#if(STD_ON == Dem_InitCheck)
    if(E_OK == IsInitDone){
 #if(STD_ON == Dem_DevErrorDetect)
       Det_ReportError(
@@ -133,6 +134,7 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
 #endif
    }
    else{
+#endif
       if(NULL_PTR == lptrCfgModule){
 #if(STD_ON == Dem_DevErrorDetect)
          Det_ReportError(
@@ -145,10 +147,13 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
       }
       EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
       IsInitDone = E_OK;
+#if(STD_ON == Dem_InitCheck)
    }
+#endif
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
+#if(STD_ON == Dem_InitCheck)
    if(E_OK != IsInitDone){
 #if(STD_ON == Dem_DevErrorDetect)
       Det_ReportError(
@@ -156,30 +161,45 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 #endif
    }
    else{
+#endif
       EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
       IsInitDone = E_NOT_OK;
+#if(STD_ON == Dem_InitCheck)
    }
+#endif
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
-   switch(EcuM_Context.ePhase){
-      case E_EcuM_Phase_UP:
-         break;
-
-      case E_EcuM_Phase_SLEEP:
-         //...
-         EcuM_Context.ePhase = E_EcuM_Phase_UP;
-         break;
-
-      case E_EcuM_Phase_SHUTDOWN:
-         GoDownHaltPoll();
-         Shutdown();
-         break;
-
-      default:
-         EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
-         break;
+#if(STD_ON == Dem_InitCheck)
+   if(E_OK != IsInitDone){
+#if(STD_ON == Dem_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
    }
+   else{
+#endif
+      switch(EcuM_Context.ePhase){
+         case E_EcuM_Phase_UP:
+            break;
+
+         case E_EcuM_Phase_SLEEP:
+            //...
+            EcuM_Context.ePhase = E_EcuM_Phase_UP;
+            break;
+
+         case E_EcuM_Phase_SHUTDOWN:
+            GoDownHaltPoll();
+            Shutdown();
+            break;
+
+         default:
+            EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
+            break;
+      }
+#if(STD_ON == Dem_InitCheck)
+   }
+#endif
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
