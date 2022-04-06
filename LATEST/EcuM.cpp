@@ -16,18 +16,18 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define ECUM_AR_RELEASE_MAJOR_VERSION                                          4
-#define ECUM_AR_RELEASE_MINOR_VERSION                                          3
+#define ECUM_AR_RELEASE_VERSION_MAJOR                                          4
+#define ECUM_AR_RELEASE_VERSION_MINOR                                          3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#if(ECUM_AR_RELEASE_MAJOR_VERSION != STD_AR_RELEASE_MAJOR_VERSION)
-   #error "Incompatible ECUM_AR_RELEASE_MAJOR_VERSION!"
+#if(ECUM_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
+   #error "Incompatible ECUM_AR_RELEASE_VERSION_MAJOR!"
 #endif
 
-#if(ECUM_AR_RELEASE_MINOR_VERSION != STD_AR_RELEASE_MINOR_VERSION)
-   #error "Incompatible ECUM_AR_RELEASE_MINOR_VERSION!"
+#if(ECUM_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
+   #error "Incompatible ECUM_AR_RELEASE_VERSION_MINOR!"
 #endif
 
 /******************************************************************************/
@@ -78,8 +78,10 @@ CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceE
 /******************************************************************************/
 VAR(module_EcuM, ECUM_VAR) EcuM(
    {
-         0x0000
-      ,  0xFFFF
+         ECUM_AR_RELEASE_VERSION_MAJOR
+      ,  ECUM_AR_RELEASE_VERSION_MINOR
+      ,  0x00
+      ,  0xFF
       ,  0x01
       ,  '0'
       ,  '1'
