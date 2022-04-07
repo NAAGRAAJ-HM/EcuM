@@ -144,8 +144,14 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
 #endif
       }
       else{
+         if(STD_LOW){
 // check lptrCfgModule for memory faults
-// use PBcfg_EcuM as back-up configuration
+            lptrCfg = lptrCfgModule;
+         }
+         else{
+// use PBcfg_CanIf as back-up configuration
+            lptrCfg = PBcfg_CanIf;
+         }
       }
       EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
       IsInitDone = E_OK;
