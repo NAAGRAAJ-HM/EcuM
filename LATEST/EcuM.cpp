@@ -33,11 +33,18 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+class class_EcuM_Functionality{
+   public:
+      FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);
+      FUNC(void, ECUM_CODE) Shutdown                 (void);
+};
+
 class module_EcuM:
       public abstract_module
    ,  public infEcuM_StartUp
    ,  public infEcuM_Os
    ,  public infEcuM_SwcServiceEcuM
+   ,  public class_EcuM_Functionality
 {
    public:
       module_EcuM(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
@@ -98,14 +105,14 @@ VAR(module_EcuM, ECUM_VAR) EcuM(
 #include "infSwcServiceEcuM_EcuM.hpp"
 
 //TBD: static?
-//FUNC(void, ECUM_CODE) class_EcuM_Unused::GoDownHaltPoll(void){
+//FUNC(void, ECUM_CODE) class_EcuM_Functionality::GoDownHaltPoll(void){
 static void GoDownHaltPoll(void){
    gptrinfSwcServiceEcuM_EcuM->OffPreOs();
    gptrinfOs_EcuM->Shutdown();
 }
 
 //TBD: static?
-//FUNC(void, ECUM_CODE) class_EcuM_Unused::Shutdown(void){
+//FUNC(void, ECUM_CODE) class_EcuM_Functionality::Shutdown(void){
 static void Shutdown(void){
    gptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
@@ -132,6 +139,10 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    if(E_OK == IsInitDone){
 #if(STD_ON == Dem_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -140,6 +151,10 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
       if(NULL_PTR == lptrCfgModule){
 #if(STD_ON == Dem_DevErrorDetect)
          Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
          );
 #endif
       }
@@ -165,6 +180,10 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
    if(E_OK != IsInitDone){
 #if(STD_ON == Dem_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -182,6 +201,10 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
    if(E_OK != IsInitDone){
 #if(STD_ON == Dem_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -236,12 +259,6 @@ FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
 
 FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
 }
-
-class class_EcuM_Unused{
-   public:
-      FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);
-      FUNC(void, ECUM_CODE) Shutdown                 (void);
-};
 
 /******************************************************************************/
 /* EOF                                                                        */
