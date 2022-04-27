@@ -33,12 +33,6 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
-class class_EcuM_Functionality{
-   public:
-      FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);
-      FUNC(void, ECUM_CODE) Shutdown                 (void);
-};
-
 class module_EcuM:
       public abstract_module
    ,  public infEcuM_StartUp
@@ -105,15 +99,15 @@ VAR(module_EcuM, ECUM_VAR) EcuM(
 #include "infSwcServiceEcuM_EcuM.hpp"
 
 //TBD: static?
-//FUNC(void, ECUM_CODE) class_EcuM_Functionality::GoDownHaltPoll(void){
-static void GoDownHaltPoll(void){
+FUNC(void, ECUM_CODE) class_EcuM_Functionality::GoDownHaltPoll(void){
+//static void GoDownHaltPoll(void){
    gptrinfSwcServiceEcuM_EcuM->OffPreOs();
    gptrinfOs_EcuM->Shutdown();
 }
 
 //TBD: static?
-//FUNC(void, ECUM_CODE) class_EcuM_Functionality::Shutdown(void){
-static void Shutdown(void){
+FUNC(void, ECUM_CODE) class_EcuM_Functionality::Shutdown(void){
+//static void Shutdown(void){
    gptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
 
