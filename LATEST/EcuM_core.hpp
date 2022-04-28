@@ -7,10 +7,18 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
+#include "CompilerCfg_EcuM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
+#define ECUM_COREFUNCTIONALITIES                                               \
+              FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);           \
+              FUNC(void, ECUM_CODE) Shutdown                 (void);           \
+
+#define ECUM_COREFUNCTIONALITIES_VIRTUAL                                       \
+      virtual FUNC(void, ECUM_CODE) GoDownHaltPoll           (void) = 0;       \
+      virtual FUNC(void, ECUM_CODE) Shutdown                 (void) = 0;       \
 
 /******************************************************************************/
 /* MACROS                                                                     */
@@ -21,8 +29,7 @@
 /******************************************************************************/
 class class_EcuM_Functionality{
    public:
-      FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);
-      FUNC(void, ECUM_CODE) Shutdown                 (void);
+      ECUM_COREFUNCTIONALITIES_VIRTUAL
 };
 
 /******************************************************************************/

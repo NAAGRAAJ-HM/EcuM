@@ -7,6 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
+#include "EcuM_core.hpp"
 #include "infEcuM_StartUp.hpp"
 #include "infEcuM_Dcm.hpp"
 #include "infEcuM_SchM.hpp"
