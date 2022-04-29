@@ -7,12 +7,9 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
+#include "CfgEcuM.hpp"
 #include "EcuM_core.hpp"
-#include "infEcuM_StartUp.hpp"
-#include "infEcuM_Dcm.hpp"
-#include "infEcuM_SchM.hpp"
-#include "infEcuM_Os.hpp"
-#include "infEcuM_SwcServiceEcuM.hpp"
+#include "infEcuM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -36,6 +33,7 @@
 /******************************************************************************/
 class module_EcuM:
       public abstract_module
+      //TBD: move to infEcuM.hpp ?
    ,  public infEcuM_StartUp
    ,  public infEcuM_Os
    ,  public infEcuM_SwcServiceEcuM
@@ -49,6 +47,7 @@ class module_EcuM:
       );
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
+      ECUM_CORE_FUNCTIONALITIES
 
       FUNC(void, ECUM_CODE) InitFunction             (void);
       FUNC(void, ECUM_CODE) StartupTwo               (void);
@@ -73,7 +72,6 @@ CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceE
 /******************************************************************************/
 /* PARAMS                                                                     */
 /******************************************************************************/
-#include "CfgEcuM.hpp"
 
 /******************************************************************************/
 /* OBJECTS                                                                    */

@@ -1,24 +1,21 @@
 #pragma once
 /******************************************************************************/
-/* File   : EcuM_core.hpp                                                     */
+/* File   : infEcuM.hpp                                                       */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "CompilerCfg_EcuM.hpp"
+#include "infEcuM_StartUp.hpp"
+#include "infEcuM_Dcm.hpp"
+#include "infEcuM_SchM.hpp"
+#include "infEcuM_Os.hpp"
+#include "infEcuM_SwcServiceEcuM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define ECUM_CORE_FUNCTIONALITIES                                              \
-              FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);           \
-              FUNC(void, ECUM_CODE) Shutdown                 (void);           \
-
-#define ECUM_CORE_FUNCTIONALITIES_VIRTUAL                                      \
-      virtual FUNC(void, ECUM_CODE) GoDownHaltPoll           (void) = 0;       \
-      virtual FUNC(void, ECUM_CODE) Shutdown                 (void) = 0;       \
 
 /******************************************************************************/
 /* MACROS                                                                     */
@@ -27,10 +24,6 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
-class class_EcuM_Functionality{
-   public:
-      ECUM_CORE_FUNCTIONALITIES_VIRTUAL
-};
 
 /******************************************************************************/
 /* CONSTS                                                                     */
