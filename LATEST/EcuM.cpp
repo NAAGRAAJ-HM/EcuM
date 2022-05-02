@@ -98,14 +98,14 @@ VAR(module_EcuM, ECUM_VAR) EcuM(
 #include "infSwcServiceEcuM_EcuM.hpp"
 
 //TBD: static?
-FUNC(void, ECUM_CODE) class_EcuM_Functionality::GoDownHaltPoll(void){
+FUNC(void, ECUM_CODE) module_EcuM::GoDownHaltPoll(void){
 //static void GoDownHaltPoll(void){
    gptrinfSwcServiceEcuM_EcuM->OffPreOs();
    gptrinfOs_EcuM->Shutdown();
 }
 
 //TBD: static?
-FUNC(void, ECUM_CODE) class_EcuM_Functionality::Shutdown(void){
+FUNC(void, ECUM_CODE) module_EcuM::Shutdown(void){
 //static void Shutdown(void){
    gptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
