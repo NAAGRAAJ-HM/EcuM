@@ -129,40 +129,40 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == Dem_InitCheck)
-   if(E_OK == IsInitDone){
-#if(STD_ON == Dem_DevErrorDetect)
-      Det_ReportError(
-      0 //TBD: IdModule
-   ,  0 //TBD: IdInstance
-   ,  0 //TBD: IdApi
-   ,  0 //TBD: IdError
-      );
+   if(E_OK != IsInitDone){
 #endif
-   }
-   else{
-#endif
-      if(NULL_PTR == lptrCfgModule){
-#if(STD_ON == Dem_DevErrorDetect)
-         Det_ReportError(
-      0 //TBD: IdModule
-   ,  0 //TBD: IdInstance
-   ,  0 //TBD: IdApi
-   ,  0 //TBD: IdError
-         );
-#endif
-      }
-      else{
+      if(NULL_PTR == !ptrCfgModule){
          if(STD_LOW){
-// check lptrCfgModule for memory faults
+            // check lptrCfgModule for memory faults
             lptrCfg = lptrCfgModule;
          }
          else{
-// use PBcfgCanIf as back-up configuration
+            // use PBcfgCanIf as back-up configuration
             lptrCfg = &PBcfgEcuM;
          }
       }
-      EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
+      else{
+#if(STD_ON == Dem_DevErrorDetect)
+         Det_ReportError(
+               0 //TBD: IdModule
+            ,  0 //TBD: IdInstance
+            ,  0 //TBD: IdApi
+            ,  0 //TBD: IdError
+         );
+#endif
+      }
       IsInitDone = E_OK;
+      EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
+   }
+   else{
+#if(STD_ON == Dem_DevErrorDetect)
+      Det_ReportError(
+            0 //TBD: IdModule
+         ,  0 //TBD: IdInstance
+         ,  0 //TBD: IdApi
+         ,  0 //TBD: IdError
+      );
+#endif
 #if(STD_ON == Dem_InitCheck)
    }
 #endif
@@ -170,38 +170,28 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 #if(STD_ON == Dem_InitCheck)
-   if(E_OK != IsInitDone){
-#if(STD_ON == Dem_DevErrorDetect)
-      Det_ReportError(
-      0 //TBD: IdModule
-   ,  0 //TBD: IdInstance
-   ,  0 //TBD: IdApi
-   ,  0 //TBD: IdError
-      );
-#endif
-   }
-   else{
+   if(E_OK == IsInitDone){
 #endif
       EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
-      IsInitDone = E_NOT_OK;
 #if(STD_ON == Dem_InitCheck)
+      IsInitDone = E_NOT_OK;
+   }
+   else{
+#if(STD_ON == Dem_DevErrorDetect)
+      Det_ReportError(
+            0 //TBD: IdModule
+         ,  0 //TBD: IdInstance
+         ,  0 //TBD: IdApi
+         ,  0 //TBD: IdError
+      );
+#endif
    }
 #endif
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
 #if(STD_ON == Dem_InitCheck)
-   if(E_OK != IsInitDone){
-#if(STD_ON == Dem_DevErrorDetect)
-      Det_ReportError(
-      0 //TBD: IdModule
-   ,  0 //TBD: IdInstance
-   ,  0 //TBD: IdApi
-   ,  0 //TBD: IdError
-      );
-#endif
-   }
-   else{
+   if(E_OK == IsInitDone){
 #endif
       switch(EcuM_Context.ePhase){
          case E_EcuM_Phase_UP:
@@ -222,6 +212,16 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
             break;
       }
 #if(STD_ON == Dem_InitCheck)
+   }
+   else{
+#if(STD_ON == Dem_DevErrorDetect)
+      Det_ReportError(
+            0 //TBD: IdModule
+         ,  0 //TBD: IdInstance
+         ,  0 //TBD: IdApi
+         ,  0 //TBD: IdError
+      );
+#endif
    }
 #endif
 }
