@@ -131,7 +131,7 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
 #if(STD_ON == Dem_InitCheck)
    if(E_OK != IsInitDone){
 #endif
-      if(NULL_PTR == !ptrCfgModule){
+      if(NULL_PTR != lptrCfgModule){
          if(STD_LOW){
             // check lptrCfgModule for memory faults
             lptrCfg = lptrCfgModule;
@@ -151,8 +151,9 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
          );
 #endif
       }
-      IsInitDone = E_OK;
       EcuM_Context.ePhase = E_EcuM_Phase_STARTUP;
+#if(STD_ON == Dem_InitCheck)
+      IsInitDone = E_OK;
    }
    else{
 #if(STD_ON == Dem_DevErrorDetect)
@@ -160,10 +161,9 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  0 //TBD: IdError
+         ,  ECUM_E_UNINIT
       );
 #endif
-#if(STD_ON == Dem_InitCheck)
    }
 #endif
 }
@@ -182,7 +182,7 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  0 //TBD: IdError
+         ,  ECUM_E_UNINIT
       );
 #endif
    }
@@ -219,7 +219,7 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  0 //TBD: IdError
+         ,  ECUM_E_UNINIT
       );
 #endif
    }
