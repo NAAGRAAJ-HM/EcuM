@@ -132,12 +132,10 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    if(E_OK != IsInitDone){
 #endif
       if(NULL_PTR != lptrCfgModule){
-         if(STD_LOW){
-            // check lptrCfgModule for memory faults
+         if(STD_HIGH){
             lptrCfg = lptrCfgModule;
          }
          else{
-            // use PBcfgCanIf as back-up configuration
             lptrCfg = &PBcfgEcuM;
          }
       }
