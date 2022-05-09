@@ -39,6 +39,13 @@ class module_EcuM:
    ,  public infEcuM_SwcServiceEcuM
    ,  public class_EcuM_Functionality
 {
+   private:
+/******************************************************************************/
+/* OBJECTS                                                                    */
+/******************************************************************************/
+            Std_TypeReturn          IsInitDone{E_NOT_OK};
+      const CfgModule_TypeAbstract* lptrCfg{(CfgModule_TypeAbstract*)NULL_PTR};
+
    public:
       module_EcuM(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
       }
