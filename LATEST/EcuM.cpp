@@ -136,7 +136,10 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == Dem_InitCheck)
-   if(E_OK != IsInitDone){
+   if(
+         E_OK
+      != IsInitDone
+   ){
 #endif
       if(NULL_PTR != lptrCfgModule){
          if(STD_HIGH){
@@ -175,7 +178,10 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
 
 FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 #if(STD_ON == Dem_InitCheck)
-   if(E_OK == IsInitDone){
+   if(
+         E_OK
+      == IsInitDone
+   ){
 #endif
       EcuM_Context.ePhase = E_EcuM_Phase_UNKNOWN;
 #if(STD_ON == Dem_InitCheck)
@@ -196,7 +202,10 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 
 FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
 #if(STD_ON == Dem_InitCheck)
-   if(E_OK == IsInitDone){
+   if(
+         E_OK
+      == IsInitDone
+   ){
 #endif
       switch(EcuM_Context.ePhase){
          case E_EcuM_Phase_UP:
