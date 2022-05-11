@@ -9,7 +9,7 @@
 #include "Module.hpp"
 #include "CfgEcuM.hpp"
 #include "EcuM_core.hpp"
-#include "infEcuM.hpp"
+#include "infEcuM_Exp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -32,6 +32,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_EcuM:
+   INTERFACES_EXPORTED_ECUM
       public abstract_module
       //TBD: move to infEcuM.hpp ?
    ,  public infEcuM_StartUp
