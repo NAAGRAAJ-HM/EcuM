@@ -17,7 +17,9 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define INTERFACES_EXPORTED_ECUM
+#define INTERFACES_EXPORTED_ECUM                  public infEcuM_StartUp       \
+                                               ,  public infEcuM_Os            \
+                                               ,  public infEcuM_SwcServiceEcuM
 
 /******************************************************************************/
 /* MACROS                                                                     */

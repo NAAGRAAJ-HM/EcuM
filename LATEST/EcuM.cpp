@@ -32,12 +32,8 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_EcuM:
-   INTERFACES_EXPORTED_ECUM
-      public abstract_module
-      //TBD: move to infEcuM.hpp ?
-   ,  public infEcuM_StartUp
-   ,  public infEcuM_Os
-   ,  public infEcuM_SwcServiceEcuM
+      INTERFACES_EXPORTED_ECUM
+   ,  public abstract_module
    ,  public class_EcuM_Functionality
 {
    private:
