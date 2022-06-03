@@ -10,6 +10,7 @@
 #include "CfgEcuM.hpp"
 #include "EcuM_core.hpp"
 #include "infEcuM_Exp.hpp"
+#include "infEcuM_Imp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
