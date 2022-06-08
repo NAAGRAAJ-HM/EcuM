@@ -84,7 +84,7 @@ CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceE
 VAR(module_EcuM, ECUM_VAR) EcuM(
    {
 #if(STD_ON == _ReSIM)
-// char strModuleName[6];
+   char strModuleName[6] = "ECUM";
 #else
 #endif
          ECUM_AR_RELEASE_VERSION_MAJOR
