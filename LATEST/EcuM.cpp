@@ -103,15 +103,17 @@ VAR(module_EcuM, ECUM_VAR) EcuM(
 #include "infSwcServiceEcuM_EcuM.hpp"
 
 //TBD: static?
-FUNC(void, ECUM_CODE) module_EcuM::GoDownHaltPoll(void){
-//static void GoDownHaltPoll(void){
+FUNC(void, ECUM_CODE) module_EcuM::GoDownHaltPoll(
+   void
+){
    gptrinfSwcServiceEcuM_EcuM->OffPreOs();
    gptrinfOs_EcuM->Shutdown();
 }
 
 //TBD: static?
-FUNC(void, ECUM_CODE) module_EcuM::Shutdown(void){
-//static void Shutdown(void){
+FUNC(void, ECUM_CODE) module_EcuM::Shutdown(
+   void
+){
    gptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
 
@@ -174,7 +176,9 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
 #endif
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
+FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(
+   void
+){
 #if(STD_ON == Dem_InitCheck)
    if(
          E_OK
@@ -198,7 +202,9 @@ FUNC(void, ECUM_CODE) module_EcuM::DeInitFunction(void){
 #endif
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
+FUNC(void, ECUM_CODE) module_EcuM::MainFunction(
+   void
+){
 #if(STD_ON == Dem_InitCheck)
    if(
          E_OK
@@ -238,31 +244,45 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(void){
 #endif
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::InitFunction(void){
+FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
+   void
+){
    gptrinfSwcServiceEcuM_EcuM->StartPreOs();
    gptrinfOs_EcuM->Start();
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(void){
+FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(
+   void
+){
    gptrinfSwcServiceEcuM_EcuM->StartPostOs();
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::DeterminePbConfiguration(void){
+FUNC(void, ECUM_CODE) module_EcuM::DeterminePbConfiguration(
+   void
+){
 }
 
-FUNC(bool, ECUM_CODE) module_EcuM::GetPendingWakeupEvents(void){
+FUNC(bool, ECUM_CODE) module_EcuM::GetPendingWakeupEvents(
+   void
+){
    return true;
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::GetValidatedWakeupEvents(void){
+FUNC(void, ECUM_CODE) module_EcuM::GetValidatedWakeupEvents(
+   void
+){
    gptrinfMcu_EcuM->GetResetReason();
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(void){
+FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(
+   void
+){
 }
 
-FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(void){
+FUNC(void, ECUM_CODE) module_EcuM::SelectShutdownTarget(
+   void
+){
 }
 
 /******************************************************************************/
