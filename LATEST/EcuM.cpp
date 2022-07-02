@@ -127,12 +127,7 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    ){
 #endif
       if(NULL_PTR != lptrCfgModule){
-         if(STD_HIGH){
-            lptrCfg = lptrCfgModule;
-         }
-         else{
-            lptrCfg = &PBcfgEcuM;
-         }
+         lptrCfg = lptrCfgModule;
       }
       else{
 #if(STD_ON == Dem_DevErrorDetect)
