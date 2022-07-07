@@ -52,7 +52,6 @@ VAR(module_EcuM, ECUM_VAR) EcuM;
 /******************************************************************************/
 #include "infMcu_EcuM.hpp"
 #include "infOs_EcuM.hpp"
-#include "infStartUp_EcuM.hpp"
 #include "infSwcServiceEcuM_EcuM.hpp"
 
 //TBD: static?
