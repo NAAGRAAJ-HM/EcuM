@@ -8,9 +8,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "infEcuM_StartUp.hpp"
-#include "infEcuM_Dcm.hpp"
 #include "infEcuM_Det.hpp"
-#include "infEcuM_SchM.hpp"
 #include "infEcuM_Os.hpp"
 #include "infEcuM_SwcServiceEcuM.hpp"
 

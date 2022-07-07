@@ -34,8 +34,6 @@
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
-CONSTP2VAR(infDcmClient,           ECUM_VAR, ECUM_CONST) gptrinfDcmClient_EcuM      = &EcuM;
-CONSTP2VAR(infSchMClient,          ECUM_VAR, ECUM_CONST) gptrinfSchMClient_EcuM     = &EcuM;
 CONSTP2VAR(infEcuM_StartUp,        ECUM_VAR, ECUM_CONST) gptrinfEcuM_StartUp        = &EcuM;
 CONSTP2VAR(infEcuM_Os,             ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os             = &EcuM;
 CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM = &EcuM;
