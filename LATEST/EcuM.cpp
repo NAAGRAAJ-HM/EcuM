@@ -34,9 +34,6 @@
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
-CONSTP2VAR(infEcuM_StartUp,        ECUM_VAR, ECUM_CONST) gptrinfEcuM_StartUp        = &EcuM;
-CONSTP2VAR(infEcuM_Os,             ECUM_VAR, ECUM_CONST) gptrinfEcuM_Os             = &EcuM;
-CONSTP2VAR(infEcuM_SwcServiceEcuM, ECUM_VAR, ECUM_CONST) gptrinfEcuM_SwcServiceEcuM = &EcuM;
 
 /******************************************************************************/
 /* PARAMS                                                                     */
@@ -59,7 +56,7 @@ FUNC(void, ECUM_CODE) module_EcuM::GoDownHaltPoll(
    void
 ){
    ((CfgEcuM_Type*)lptrCfg)->ptrinfSwcServiceEcuM_EcuM->OffPreOs();
-   gptrinfOs_EcuM->Shutdown();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfOs_EcuM->Shutdown();
 }
 
 //TBD: static?
@@ -195,7 +192,7 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    void
 ){
    ((CfgEcuM_Type*)lptrCfg)->ptrinfSwcServiceEcuM_EcuM->StartPreOs();
-   gptrinfOs_EcuM->Start();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfOs_EcuM->Start();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(
@@ -219,7 +216,7 @@ FUNC(bool, ECUM_CODE) module_EcuM::GetPendingWakeupEvents(
 FUNC(void, ECUM_CODE) module_EcuM::GetValidatedWakeupEvents(
    void
 ){
-   gptrinfMcu_EcuM->GetResetReason();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfMcu_EcuM->GetResetReason();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::LoopDetection(
