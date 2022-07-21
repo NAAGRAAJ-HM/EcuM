@@ -58,7 +58,7 @@ VAR(module_EcuM, ECUM_VAR) EcuM;
 FUNC(void, ECUM_CODE) module_EcuM::GoDownHaltPoll(
    void
 ){
-   gptrinfSwcServiceEcuM_EcuM->OffPreOs();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfSwcServiceEcuM_EcuM->OffPreOs();
    gptrinfOs_EcuM->Shutdown();
 }
 
@@ -66,7 +66,7 @@ FUNC(void, ECUM_CODE) module_EcuM::GoDownHaltPoll(
 FUNC(void, ECUM_CODE) module_EcuM::Shutdown(
    void
 ){
-   gptrinfSwcServiceEcuM_EcuM->OffPostOs();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfSwcServiceEcuM_EcuM->OffPostOs();
 }
 
 typedef enum{
@@ -194,14 +194,14 @@ FUNC(void, ECUM_CODE) module_EcuM::MainFunction(
 FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
    void
 ){
-   gptrinfSwcServiceEcuM_EcuM->StartPreOs();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfSwcServiceEcuM_EcuM->StartPreOs();
    gptrinfOs_EcuM->Start();
 }
 
 FUNC(void, ECUM_CODE) module_EcuM::StartupTwo(
    void
 ){
-   gptrinfSwcServiceEcuM_EcuM->StartPostOs();
+   ((CfgEcuM_Type*)lptrCfg)->ptrinfSwcServiceEcuM_EcuM->StartPostOs();
    EcuM_Context.ePhase = E_EcuM_Phase_UP;
 }
 
