@@ -32,14 +32,15 @@ class module_EcuM:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-      const ConstEcuM_Type* lptrConst;
+      const ConstEcuM_Type* lptrConst = (ConstEcuM_Type*)NULL_PTR;
 
    public:
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
       FUNC(void, ECUM_CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
+            CONSTP2CONST(ConstModule_TypeAbstract, ECUM_CONST,       ECUM_APPL_CONST) lptrConstModule
+         ,  CONSTP2CONST(CfgModule_TypeAbstract,   ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
       );
       FUNC(void, ECUM_CODE) DeInitFunction           (void);
       FUNC(void, ECUM_CODE) MainFunction             (void);
