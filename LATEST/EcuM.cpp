@@ -95,7 +95,7 @@ FUNC(void, ECUM_CODE) module_EcuM::InitFunction(
             (NULL_PTR != lptrConstModule)
          && (NULL_PTR != lptrCfgModule)
       ){
-         lptrConst = lptrConstModule;
+         lptrConst = (const ConstEcuM_Type*)lptrConstModule;
          lptrCfg   = lptrCfgModule;
       }
       else{
