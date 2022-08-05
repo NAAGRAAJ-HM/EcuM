@@ -25,11 +25,11 @@ class infServiceEcuM_ServiceSwcEcuM{
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-      virtual FUNC(void, ECUM_CODE) ServiceDeterminePbConfiguration (void) = 0;
-      virtual FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void) = 0;
-      virtual FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void) = 0;
-      virtual FUNC(void, ECUM_CODE) LoopServiceDetection            (void) = 0;
-      virtual FUNC(void, ECUM_CODE) SelectShutdownTarget     (void) = 0;
+      virtual FUNC(void, SERVICEECUM_CODE) ServiceDeterminePbConfiguration (void) = 0;
+      virtual FUNC(void, SERVICEECUM_CODE) GetValidatedWakeupEvents (void) = 0;
+      virtual FUNC(bool, SERVICEECUM_CODE) GetPendingWakeupEvents   (void) = 0;
+      virtual FUNC(void, SERVICEECUM_CODE) LoopServiceDetection            (void) = 0;
+      virtual FUNC(void, SERVICEECUM_CODE) SelectShutdownTarget     (void) = 0;
 };
 
 /******************************************************************************/

@@ -12,13 +12,13 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define ECUM_CORE_FUNCTIONALITIES                                              \
-              FUNC(void, ECUM_CODE) GoDownHaltPoll           (void);           \
-              FUNC(void, ECUM_CODE) Shutdown                 (void);           \
+#define SERVICEECUM_CORE_FUNCTIONALITIES                                              \
+              FUNC(void, SERVICEECUM_CODE) GoDownHaltPoll           (void);           \
+              FUNC(void, SERVICEECUM_CODE) Shutdown                 (void);           \
 
-#define ECUM_CORE_FUNCTIONALITIES_VIRTUAL                                      \
-      virtual FUNC(void, ECUM_CODE) GoDownHaltPoll           (void) = 0;       \
-      virtual FUNC(void, ECUM_CODE) Shutdown                 (void) = 0;       \
+#define SERVICEECUM_CORE_FUNCTIONALITIES_VIRTUAL                                      \
+      virtual FUNC(void, SERVICEECUM_CODE) GoDownHaltPoll           (void) = 0;       \
+      virtual FUNC(void, SERVICEECUM_CODE) Shutdown                 (void) = 0;       \
 
 /******************************************************************************/
 /* MACROS                                                                     */
@@ -29,7 +29,7 @@
 /******************************************************************************/
 class class_ServiceEcuM_Functionality{
    public:
-      ECUM_CORE_FUNCTIONALITIES_VIRTUAL
+      SERVICEECUM_CORE_FUNCTIONALITIES_VIRTUAL
 };
 
 /******************************************************************************/

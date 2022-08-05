@@ -24,7 +24,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_ServiceEcuM:
-      INTERFACES_EXPORTED_ECUM
+      INTERFACES_EXMCALPORTED_SERVICEECUM
    ,  public abstract_module
    ,  public class_ServiceEcuM_Functionality
 {
@@ -38,21 +38,21 @@ class module_ServiceEcuM:
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-      FUNC(void, ECUM_CODE) InitFunction(
-            CONSTP2CONST(ConstModule_TypeAbstract, ECUM_CONST,       ECUM_APPL_CONST) lptrConstModule
-         ,  CONSTP2CONST(CfgModule_TypeAbstract,   ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
+      FUNC(void, SERVICEECUM_CODE) InitFunction(
+            CONSTP2CONST(ConstModule_TypeAbstract, SERVICEECUM_CONST,       SERVICEECUM_APPL_CONST) lptrConstModule
+         ,  CONSTP2CONST(CfgModule_TypeAbstract,   SERVICEECUM_CONFIG_DATA, SERVICEECUM_APPL_CONST) lptrCfgModule
       );
-      FUNC(void, ECUM_CODE) DeInitFunction           (void);
-      FUNC(void, ECUM_CODE) MainFunction             (void);
-      ECUM_CORE_FUNCTIONALITIES
+      FUNC(void, SERVICEECUM_CODE) DeInitFunction           (void);
+      FUNC(void, SERVICEECUM_CODE) MainFunction             (void);
+      SERVICEECUM_CORE_FUNCTIONALITIES
 
-      FUNC(void, ECUM_CODE) InitFunction             (void);
-      FUNC(void, ECUM_CODE) StartupTwo               (void);
-      FUNC(void, ECUM_CODE) ServiceDeterminePbConfiguration (void);
-      FUNC(bool, ECUM_CODE) GetPendingWakeupEvents   (void);
-      FUNC(void, ECUM_CODE) GetValidatedWakeupEvents (void);
-      FUNC(void, ECUM_CODE) LoopServiceDetection            (void);
-      FUNC(void, ECUM_CODE) SelectShutdownTarget     (void);
+      FUNC(void, SERVICEECUM_CODE) InitFunction             (void);
+      FUNC(void, SERVICEECUM_CODE) StartupTwo               (void);
+      FUNC(void, SERVICEECUM_CODE) ServiceDeterminePbConfiguration (void);
+      FUNC(bool, SERVICEECUM_CODE) GetPendingWakeupEvents   (void);
+      FUNC(void, SERVICEECUM_CODE) GetValidatedWakeupEvents (void);
+      FUNC(void, SERVICEECUM_CODE) LoopServiceDetection            (void);
+      FUNC(void, SERVICEECUM_CODE) SelectShutdownTarget     (void);
 };
 
 /******************************************************************************/
@@ -66,7 +66,7 @@ class module_ServiceEcuM:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-extern VAR(module_ServiceEcuM, ECUM_VAR) ServiceEcuM;
+extern VAR(module_ServiceEcuM, SERVICEECUM_VAR) ServiceEcuM;
 
 /******************************************************************************/
 /* EOF                                                                        */

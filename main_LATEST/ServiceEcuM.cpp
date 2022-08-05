@@ -13,18 +13,18 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define ECUM_AR_RELEASE_VERSION_MAJOR                                          4
-#define ECUM_AR_RELEASE_VERSION_MINOR                                          3
+#define SERVICEECUM_AR_RELEASE_VERSION_MAJOR                                          4
+#define SERVICEECUM_AR_RELEASE_VERSION_MINOR                                          3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#if(ECUM_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
-   #error "Incompatible ECUM_AR_RELEASE_VERSION_MAJOR!"
+#if(SERVICEECUM_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
+   #error "Incompatible SERVICEECUM_AR_RELEASE_VERSION_MAJOR!"
 #endif
 
-#if(ECUM_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
-   #error "Incompatible ECUM_AR_RELEASE_VERSION_MINOR!"
+#if(SERVICEECUM_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
+   #error "Incompatible SERVICEECUM_AR_RELEASE_VERSION_MINOR!"
 #endif
 
 /******************************************************************************/
@@ -42,7 +42,7 @@
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-VAR(module_ServiceEcuM, ECUM_VAR) ServiceEcuM;
+VAR(module_ServiceEcuM, SERVICEECUM_VAR) ServiceEcuM;
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
@@ -52,7 +52,7 @@ VAR(module_ServiceEcuM, ECUM_VAR) ServiceEcuM;
 #include "infServiceSwcEcuM_ServiceEcuM.hpp"
 
 //TBD: static?
-FUNC(void, ECUM_CODE) module_ServiceEcuM::GoDownHaltPoll(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::GoDownHaltPoll(
    void
 ){
    lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->OffPreServiceOs();
@@ -60,7 +60,7 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::GoDownHaltPoll(
 }
 
 //TBD: static?
-FUNC(void, ECUM_CODE) module_ServiceEcuM::Shutdown(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::Shutdown(
    void
 ){
    lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->OffPostServiceOs();
@@ -68,9 +68,9 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::Shutdown(
 
 typedef enum{
       E_ServiceEcuM_Phase_UNKNOWN
-   ,  E_ServiceEcuM_Phase_STARTUP
+   ,  E_ServiceEcuM_Phase_SERVICESTARTUP
    ,  E_ServiceEcuM_Phase_UP
-   ,  E_ServiceEcuM_Phase_SLEEP
+   ,  E_ServiceEcuM_Phase_SLMCALEEP
    ,  E_ServiceEcuM_Phase_SHUTDOWN
 }enum_ServiceEcuM_Phase;
 
@@ -81,9 +81,9 @@ class class_ServiceEcuM_Context{
 
 static class_ServiceEcuM_Context ServiceEcuM_Context;
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::InitFunction(
-      CONSTP2CONST(ConstModule_TypeAbstract, ECUM_CONST,       ECUM_APPL_CONST) lptrConstModule
-   ,  CONSTP2CONST(CfgModule_TypeAbstract,   ECUM_CONFIG_DATA, ECUM_APPL_CONST) lptrCfgModule
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::InitFunction(
+      CONSTP2CONST(ConstModule_TypeAbstract, SERVICEECUM_CONST,       SERVICEECUM_APPL_CONST) lptrConstModule
+   ,  CONSTP2CONST(CfgModule_TypeAbstract,   SERVICEECUM_CONFIG_DATA, SERVICEECUM_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == ServiceDem_InitCheck)
    if(
@@ -108,7 +108,7 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::InitFunction(
          );
 #endif
       }
-      ServiceEcuM_Context.ePhase = E_ServiceEcuM_Phase_STARTUP;
+      ServiceEcuM_Context.ePhase = E_ServiceEcuM_Phase_SERVICESTARTUP;
 #if(STD_ON == ServiceDem_InitCheck)
       IsInitDone = E_OK;
    }
@@ -118,14 +118,14 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::InitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  ECUM_E_UNINIT
+         ,  SERVICEECUM_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::DeInitFunction(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::DeInitFunction(
    void
 ){
 #if(STD_ON == ServiceDem_InitCheck)
@@ -144,14 +144,14 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::DeInitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  ECUM_E_UNINIT
+         ,  SERVICEECUM_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::MainFunction(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::MainFunction(
    void
 ){
 #if(STD_ON == ServiceDem_InitCheck)
@@ -164,7 +164,7 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::MainFunction(
          case E_ServiceEcuM_Phase_UP:
             break;
 
-         case E_ServiceEcuM_Phase_SLEEP:
+         case E_ServiceEcuM_Phase_SLMCALEEP:
             //...
             ServiceEcuM_Context.ePhase = E_ServiceEcuM_Phase_UP;
             break;
@@ -186,7 +186,7 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::MainFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  ECUM_E_UNINIT
+         ,  SERVICEECUM_E_UNINIT
       );
 #endif
    }
@@ -194,7 +194,7 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::MainFunction(
 }
 
 #include "Const.hpp"
-FUNC(void, ECUM_CODE) module_ServiceEcuM::InitFunction(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::InitFunction(
    void
 ){
    lptrConst = &Const.ConstServiceEcuM;
@@ -202,36 +202,36 @@ FUNC(void, ECUM_CODE) module_ServiceEcuM::InitFunction(
    lptrConst->ptrinfServiceOs_ServiceEcuM->Start();
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::StartupTwo(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::StartupTwo(
    void
 ){
    lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->StartPostServiceOs();
    ServiceEcuM_Context.ePhase = E_ServiceEcuM_Phase_UP;
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::ServiceDeterminePbConfiguration(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::ServiceDeterminePbConfiguration(
    void
 ){
 }
 
-FUNC(bool, ECUM_CODE) module_ServiceEcuM::GetPendingWakeupEvents(
+FUNC(bool, SERVICEECUM_CODE) module_ServiceEcuM::GetPendingWakeupEvents(
    void
 ){
    return true;
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::GetValidatedWakeupEvents(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::GetValidatedWakeupEvents(
    void
 ){
    lptrConst->ptrinfMcalMcu_ServiceEcuM->GetResetReason();
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::LoopServiceDetection(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::LoopServiceDetection(
    void
 ){
 }
 
-FUNC(void, ECUM_CODE) module_ServiceEcuM::SelectShutdownTarget(
+FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::SelectShutdownTarget(
    void
 ){
 }

@@ -22,7 +22,7 @@
 /******************************************************************************/
 class infServiceEcuM_ServiceStartUp{
    public:
-      virtual FUNC(void, ECUM_CODE) InitFunction(void) = 0;
+      virtual FUNC(void, SERVICEECUM_CODE) InitFunction(void) = 0;
 };
 
 /******************************************************************************/
