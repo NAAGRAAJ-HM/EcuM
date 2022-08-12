@@ -15,7 +15,7 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define INTERFACES_EXMCALPORTED_SERVICEECUM                  public infServiceEcuM_ServiceStartUp       \
+#define INTERFACES_EXPORTED_SERVICEECUM                  public infServiceEcuM_ServiceStartUp       \
                                                ,  public infServiceEcuM_ServiceOs            \
                                                ,  public infServiceEcuM_ServiceSwcEcuM
 

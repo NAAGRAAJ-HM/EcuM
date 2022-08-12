@@ -24,7 +24,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_ServiceEcuM:
-      INTERFACES_EXMCALPORTED_SERVICEECUM
+      INTERFACES_EXPORTED_SERVICEECUM
    ,  public abstract_module
    ,  public class_ServiceEcuM_Functionality
 {
