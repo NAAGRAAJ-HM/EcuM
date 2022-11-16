@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************************/
-/* File   : infServiceEcuM_Exp.hpp                                                   */
+/* File   : infServiceEcuM_Exp.hpp                                            */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
@@ -15,9 +15,9 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define INTERFACES_EXPORTED_SERVICEECUM                  public infServiceEcuM_ServiceStartUp       \
-                                               ,  public infServiceEcuM_ServiceOs            \
-                                               ,  public infServiceEcuM_ServiceSwcEcuM
+#define INTERFACES_EXPORTED_SERVICEECUM   public infServiceEcuM_ServiceStartUp \
+                                        , public infServiceEcuM_ServiceOs      \
+                                        , public infServiceEcuM_ServiceSwcEcuM
 
 /******************************************************************************/
 /* MACROS                                                                     */

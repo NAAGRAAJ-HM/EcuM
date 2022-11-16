@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************************/
-/* File   : ServiceEcuM_core.hpp                                                     */
+/* File   : ServiceEcuM_core.hpp                                              */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
@@ -12,13 +12,13 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define SERVICEECUM_CORE_FUNCTIONALITIES                                              \
-              FUNC(void, SERVICEECUM_CODE) GoDownHaltPoll           (void);           \
-              FUNC(void, SERVICEECUM_CODE) Shutdown                 (void);           \
+#define SERVICEECUM_CORE_FUNCTIONALITIES                                       \
+              FUNC(void, SERVICEECUM_CODE) GoDownHaltPoll          (void);     \
+              FUNC(void, SERVICEECUM_CODE) Shutdown                (void);     \
 
-#define SERVICEECUM_CORE_FUNCTIONALITIES_VIRTUAL                                      \
-      virtual FUNC(void, SERVICEECUM_CODE) GoDownHaltPoll           (void) = 0;       \
-      virtual FUNC(void, SERVICEECUM_CODE) Shutdown                 (void) = 0;       \
+#define SERVICEECUM_CORE_FUNCTIONALITIES_VIRTUAL                               \
+      virtual FUNC(void, SERVICEECUM_CODE) GoDownHaltPoll          (void) = 0; \
+      virtual FUNC(void, SERVICEECUM_CODE) Shutdown                (void) = 0; \
 
 /******************************************************************************/
 /* MACROS                                                                     */
