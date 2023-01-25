@@ -47,10 +47,6 @@ VAR(module_ServiceEcuM, SERVICEECUM_VAR) ServiceEcuM;
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-#include "infMcalMcu_ServiceEcuM.hpp"
-#include "infServiceOs_ServiceEcuM.hpp"
-#include "infServiceSwcEcuM_ServiceEcuM.hpp"
-
 //TBD: static?
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::GoDownHaltPoll(
    void
