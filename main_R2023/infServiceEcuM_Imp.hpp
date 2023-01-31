@@ -8,6 +8,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "infMcalMcu_ServiceEcuM.hpp"
+#include "infServiceNvM_ServiceEcuM.hpp"
 #include "infServiceOs_ServiceEcuM.hpp"
 #include "infServiceSwcEcuM_ServiceEcuM.hpp"
 

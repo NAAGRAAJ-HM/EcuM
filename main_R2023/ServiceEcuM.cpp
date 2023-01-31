@@ -13,19 +13,10 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define SERVICEECUM_AR_RELEASE_VERSION_MAJOR                                   4
-#define SERVICEECUM_AR_RELEASE_VERSION_MINOR                                   3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#if(SERVICEECUM_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
-   #error "Incompatible SERVICEECUM_AR_RELEASE_VERSION_MAJOR!"
-#endif
-
-#if(SERVICEECUM_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
-   #error "Incompatible SERVICEECUM_AR_RELEASE_VERSION_MINOR!"
-#endif
 
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
@@ -51,15 +42,15 @@ VAR(module_ServiceEcuM, SERVICEECUM_VAR) ServiceEcuM;
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::GoDownHaltPoll(
    void
 ){
-   lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->OffPreServiceOs();
-   lptrConst->ptrinfServiceOs_ServiceEcuM->Shutdown();
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfServiceSwcEcuM_ServiceEcuM->OffPreServiceOs(); // TBD: OOPS concepts
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfServiceOs_ServiceEcuM->Shutdown();
 }
 
 //TBD: static?
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::Shutdown(
    void
 ){
-   lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->OffPostServiceOs();
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfServiceSwcEcuM_ServiceEcuM->OffPostServiceOs();
 }
 
 typedef enum{
@@ -78,7 +69,7 @@ class class_ServiceEcuM_Context{
 static class_ServiceEcuM_Context ServiceEcuM_Context;
 
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::InitFunction(
-      CONSTP2CONST(ConstModule_TypeAbstract, SERVICEECUM_CONST,       SERVICEECUM_APPL_CONST) lptrConstModule
+      CONSTP2CONST(ConstModule_TypeAbstract, SERVICEECUM_CONST,       SERVICEECUM_APPL_CONST) lptrNvMBlocksRomModule
    ,  CONSTP2CONST(CfgModule_TypeAbstract,   SERVICEECUM_CONFIG_DATA, SERVICEECUM_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == ServiceDem_InitCheck)
@@ -88,10 +79,10 @@ FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::InitFunction(
    ){
 #endif
       if(
-            (NULL_PTR != lptrConstModule)
+            (NULL_PTR != lptrNvMBlocksRomModule)
          && (NULL_PTR != lptrCfgModule)
       ){
-         lptrConst = (const ConstServiceEcuM_Type*)lptrConstModule;
+         lptrNvMBlocksRom = lptrNvMBlocksRomModule;
          lptrCfg   = lptrCfgModule;
       }
       else{
@@ -189,19 +180,18 @@ FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::MainFunction(
 #endif
 }
 
-#include "Const.hpp"
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::InitFunction(
    void
 ){
-   lptrConst = &Const.ConstServiceEcuM;
-   lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->StartPreServiceOs();
-   lptrConst->ptrinfServiceOs_ServiceEcuM->Start();
+   lptrNvMBlocksRom = &NvM_BlocksRom.NvM_BlocksRom_ServiceEcuM;
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfServiceSwcEcuM_ServiceEcuM->StartPreServiceOs();
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfServiceOs_ServiceEcuM->Start();
 }
 
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::StartupTwo(
    void
 ){
-   lptrConst->ptrinfServiceSwcEcuM_ServiceEcuM->StartPostServiceOs();
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfServiceSwcEcuM_ServiceEcuM->StartPostServiceOs();
    ServiceEcuM_Context.ePhase = E_ServiceEcuM_Phase_UP;
 }
 
@@ -219,7 +209,7 @@ FUNC(bool, SERVICEECUM_CODE) module_ServiceEcuM::GetPendingWakeupEvents(
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::GetValidatedWakeupEvents(
    void
 ){
-   lptrConst->ptrinfMcalMcu_ServiceEcuM->GetResetReason();
+   ((NvM_BlocksRom_ServiceEcuM_Type*)lptrNvMBlocksRom)->ptrinfMcalMcu_ServiceEcuM->GetResetReason();
 }
 
 FUNC(void, SERVICEECUM_CODE) module_ServiceEcuM::LoopServiceDetection(
