@@ -17,13 +17,15 @@
 class NvM_BlocksRom_ServiceEcuM_Type:
       public ConstModule_TypeAbstract
 {
-/******************************************************************************/
-/* CONSTS                                                                     */
-/******************************************************************************/
    public:
       infMcalMcu_ServiceEcuM*        ptrinfMcalMcu_ServiceEcuM;
       infServiceOs_ServiceEcuM*      ptrinfServiceOs_ServiceEcuM;
       infServiceSwcEcuM_ServiceEcuM* ptrinfServiceSwcEcuM_ServiceEcuM;
+};
+
+class NvM_BlocksNv_ServiceEcuM_Type:
+      public CfgModule_TypeAbstract
+{
 };
 
 /******************************************************************************/
